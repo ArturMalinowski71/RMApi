@@ -61,6 +61,10 @@ public class EpisodeService {
 
         return result;
     }
+    public List<String> getSeasonEpisodesInformation(String id){
+
+        return null;
+    }
 
 
 }
