@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 
 @SpringBootApplication
@@ -17,12 +19,9 @@ public class RickAndMortyApplication {
 		SpringApplication.run(RickAndMortyApplication.class, args);
 
 		EpisodeService episodeService = new EpisodeService();
-		List <EpisodeDto> test = new LinkedList<>();
-		test = episodeService.getAllEpisodes();
-
-		for (EpisodeDto epki : test){
-			System.out.println(epki.getEpisode());
-		}
+		List<EpisodeDto> temp =new LinkedList<>();
+		temp=episodeService.getAllEpisodes();
+		System.out.println(episodeService.getSeasonInformation(temp));
 
 	}
 
