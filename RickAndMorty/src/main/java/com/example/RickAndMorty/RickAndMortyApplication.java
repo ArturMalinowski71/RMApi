@@ -18,10 +18,6 @@ public class RickAndMortyApplication {
 	public static void main(String[] args)  {
 		SpringApplication.run(RickAndMortyApplication.class, args);
 
-		EpisodeService episodeService = new EpisodeService();
-		List<EpisodeDto> temp =new LinkedList<>();
-		temp=episodeService.getAllEpisodes();
-		System.out.println(episodeService.getSeasonInformation(temp));
 
 	}
 

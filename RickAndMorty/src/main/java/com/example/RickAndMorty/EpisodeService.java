@@ -1,6 +1,8 @@
 package com.example.RickAndMorty;
 
+import com.example.RickAndMorty.Model.CharacterDTO;
 import com.example.RickAndMorty.Model.EpisodeDto;
+import com.example.RickAndMorty.Model.EpisodeOutDto;
 import com.example.RickAndMorty.Model.Tech;
 import com.google.gson.Gson;
 import org.springframework.http.ResponseEntity;
@@ -61,9 +63,51 @@ public class EpisodeService {
 
         return result;
     }
-    public List<String> getSeasonEpisodesInformation(String id){
+    public List<EpisodeOutDto> getSeasonEpisodesInformation(List<EpisodeDto> episodes ,String id){
+        List<EpisodeOutDto> result = new LinkedList<>();
 
-        return null;
+        for (EpisodeDto episode : episodes){
+            String season = String.valueOf(episode.getEpisode().subSequence(0, 3));
+            if (season.equals(id)){
+                EpisodeOutDto temp = EpisodeOutDto.builder()
+                        .name(episode.getName())
+                        .created(episode.getCreated())
+                        .charactersName(getCharactersNames(episode))
+                        .urls(getCharactersUrl(episode))
+                        .build();
+                result.add(temp);
+            }
+        }
+
+        return result;
+    }
+    List<String> getCharactersNames(EpisodeDto episode){
+        List<String> results = new LinkedList<>();
+        List<String> temp = episode.getCharacters();
+        for (String s : temp){
+            CharacterDTO response = restTemplate.getForObject(s,CharacterDTO.class);
+            CharacterDTO characterDTO = CharacterDTO.builder()
+                    .name(response.getName())
+                    .url(response.getUrl())
+                    .build();
+            String temporary = characterDTO.getName();
+            results.add(temporary);
+        }
+        return results;
+    }
+    List<String> getCharactersUrl(EpisodeDto episode){
+        List<String> results = new LinkedList<>();
+        List<String> temp = episode.getCharacters();
+        for (String s : temp){
+            CharacterDTO response = restTemplate.getForObject(s,CharacterDTO.class);
+            CharacterDTO characterDTO = CharacterDTO.builder()
+                    .name(response.getName())
+                    .url(response.getUrl())
+                    .build();
+            String temporary = characterDTO.getUrl();
+            results.add(temporary);
+        }
+        return results;
     }
 
 

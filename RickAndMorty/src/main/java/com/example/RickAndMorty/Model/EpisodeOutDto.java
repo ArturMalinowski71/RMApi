@@ -9,6 +9,11 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SeasonDto {
-    List<EpisodeDto> lista ;
+public class EpisodeOutDto {
+
+    String name ;
+    String created;
+    List <String> charactersName;
+    List <String> urls ;
+
 }

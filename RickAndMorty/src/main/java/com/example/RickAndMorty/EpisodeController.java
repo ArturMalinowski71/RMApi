@@ -2,6 +2,7 @@ package com.example.RickAndMorty;
 
 import com.example.RickAndMorty.EpisodeService;
 import com.example.RickAndMorty.Model.EpisodeDto;
+import com.example.RickAndMorty.Model.EpisodeOutDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +25,9 @@ public class EpisodeController {
     }
     @CrossOrigin
     @GetMapping("/episodes/{id}")
-    public List<String> getEpisodesOnSeason(@PathVariable String id){
+    public List<EpisodeOutDto> getEpisodesOnSeason(@PathVariable String id){
         List<EpisodeDto> list = episodeService.getAllEpisodes();
-        return episodeService.getSeasonEpisodesInformation(id);
+        return episodeService.getSeasonEpisodesInformation(list ,id);
     }
 
 
